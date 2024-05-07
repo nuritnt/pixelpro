@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image to Black and White</title>
+    <title>Meco:  Image Filters</title>
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    <input type="file" id="fileInput">
-    <button id="convertButton">Convert to Black & White</button>
-    <img id="image">
-    <canvas id="canvas"></canvas>
-    <script src="index.js"></script>
+    <input type="file" id="fileInput" accept="image/*">
+    <canvas id="canvas" width="400" height="300"></canvas>
+    <button id="blackWhiteBtn" style="display: none;">Black & White</button>
+    <button id="downloadBtn" style="display: none;">Download</button>
+
+    <script src="functions.js"></script>
 </body>
 </html>
