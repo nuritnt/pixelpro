@@ -35,7 +35,7 @@
             </div>
             <div class="row">
                 <div class="form-group" style="margin-bottom: 2rem;">
-                    <button id="blurBtn" class="btn btn-primary">Pixelate</button>
+                    <button id="pixelBtn" class="btn btn-primary">Pixelate</button>
 
                 </div>
             </div>
@@ -54,6 +54,7 @@
             const ctx = canvas.getContext('2d');
             const fileInput = document.getElementById('fileInput');
             const blackWhiteBtn = document.getElementById('blackWhiteBtn');
+            const pixelBtn = document.getElementById('pixelBtn')
             const greyScaleBtn = document.getElementById('greyScaleBtn');
             const downloadBtn = document.getElementById('downloadBtn');
             let originalImageData;
@@ -84,6 +85,7 @@
 
                         originalImageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
                         blackWhiteBtn.style.display = 'block';
+                        pixelBtn.style.display ='block';
                         goBackBtn.style.display = 'block';
                         downloadBtn.style.display = 'block';
                     };
@@ -102,9 +104,9 @@
                 toggleGreyScale();
             });
 
-            blurBtn.addEventListener('click', function() {
+            pixelBtn.addEventListener('click', function() {
                 ctx.putImageData(originalImageData, 0, 0);
-                toggleBlur();
+                togglePixel();
             });
 
 
@@ -143,7 +145,20 @@
 
                 ctx.putImageData(imageData, 0, 0);
             }
+            function togglePixel() {
+                const pixelSize = 10;
 
+                // Calculate the scaled dimensions
+                const scaledWidth = Math.ceil(canvas.width / pixelSize);
+                const scaledHeight = Math.ceil(canvas.height / pixelSize);
+
+                // Draw the image at a reduced size
+                ctx.drawImage(canvas, 0, 0, scaledWidth, scaledHeight);
+
+                // Disable image smoothing and enlarge the image back to full size
+                ctx.imageSmoothingEnabled = false;
+                ctx.drawImage(canvas, 0, 0, scaledWidth, scaledHeight, 0, 0, canvas.width, canvas.height)
+            }
 
             downloadBtn.addEventListener('click', function () {
                 const downloadLink = document.createElement('a');
