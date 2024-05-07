@@ -24,8 +24,3 @@ body {
   max-width: 100%;
   display: none;
 }
-
-#canvas {
-  display: none;
-  border: 2px solid #000;
-}

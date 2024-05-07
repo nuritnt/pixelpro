@@ -2,7 +2,7 @@
   "name": "pixelpro",
   "productName": "pixelpro",
   "version": "1.0.0",
-  "description": "My Electron application description",
+  "description": "Meco example app",
   "main": "src/index.js",
   "scripts": {
     "start": "electron-forge start",
@@ -29,7 +29,6 @@
   },
   "license": "MIT",
   "dependencies": {
-    "bootstrap": "^5.3.3",
     "electron-squirrel-startup": "^1.0.0"
   }
 }
