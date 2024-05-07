@@ -9,3 +9,4 @@ Group members are:
 - Caspar Mücke
 - Sadik Hrnjica
 - Lukas Tadeu
+- Tugce Nur Tas
