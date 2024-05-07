@@ -5,13 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meco: Image Filters</title>
     <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css"
 </head>
 <body>
-    <input type="file" id="fileInput" accept="image/*">
-    <canvas id="canvas" width="400" height="300"></canvas>
-    <button id="blackWhiteBtn" style="display: none;">Black & White</button>
-    <button id="greyScaleBtn" style="display: none;">Grey Scale</button>
-    <button id="downloadBtn" style="display: none;">Download</button>
+    <div class="row" style="width: 100%; text-align: center;">
+    <div class="col-lg-4">
+        <div class="row">
+            <input class="form-control" type="file" id="fileInput" accept="image/*">
+        </div>
+        <div class="row">
+            <canvas id="canvas" width="400" height="300"></canvas>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="row">
+            <div class="form-group" style="margin-bottom: 2rem;">
+    <button id="blackWhiteBtn" class="btn btn-primary">Black & White</button>
+
+            </div>
+
+        </div>
+<div class="row">
+    <div class="form-group" style="margin-bottom: 2rem;">
+        <button id="greyscaleBtn" class="btn btn-primary">Greyscale</button>
+
+                </div>
+</div>
+<div class="row">
+    <div class="form-group" style="margin-bottom: 2rem;">
+        <button id="blurBtn" class="btn btn-primary">Pixelate</button>
+
+                </div>
+</div>
+    </div>
+    <div class="col-lg-4">
+    <button id="downloadBtn" class="btn btn-primary">Download</button>
+
+    </div>
+
+    </div>
 
     <script>
         const canvas = document.getElementById('canvas');
