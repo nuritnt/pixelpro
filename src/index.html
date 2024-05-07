@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meco:  Image Filters</title>
+    <title>Meco: Image Filters</title>
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
@@ -46,12 +46,18 @@
             const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
             const data = imageData.data;
             const originalData = originalImageData.data;
+            const threshold = 128; // Schwellenwert für Schwarz-Weiß
 
             for (let i = 0; i < data.length; i += 4) {
+                // Durchschnitt der RGB-Werte
                 const avg = (originalData[i] + originalData[i + 1] + originalData[i + 2]) / 3;
-                data[i] = avg;
-                data[i + 1] = avg;
-                data[i + 2] = avg;
+                // Setze Pixel auf Schwarz oder Weiß je nach Schwellenwert
+                const bw = avg >= threshold ? 255 : 0;
+
+                data[i] = bw;       // Rot
+                data[i + 1] = bw;   // Grün
+                data[i + 2] = bw;   // Blau
+                // Alpha unverändert lassen
             }
 
             ctx.putImageData(imageData, 0, 0);
