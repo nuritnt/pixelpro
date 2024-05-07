@@ -1,47 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meco: Image Filters</title>
     <link rel="stylesheet" href="index.css">
-    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css"
-</head>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css" </head>
+
 <body>
     <div class="row" style="width: 100%; text-align: center;">
-    <div class="col-lg-4">
-        <div class="row">
-            <input class="form-control" type="file" id="fileInput" accept="image/*">
+        <div class="col-lg-4">
+            <div class="row">
+                <input class="form-control" type="file" id="fileInput" accept="image/*">
+            </div>
+            <div class="row">
+                <canvas id="canvas" width="400" height="300"></canvas>
+            </div>
         </div>
-        <div class="row">
-            <canvas id="canvas" width="400" height="300"></canvas>
-        </div>
-    </div>
-    <div class="col-lg-4">
-        <div class="row">
-            <div class="form-group" style="margin-bottom: 2rem;">
-    <button id="blackWhiteBtn" class="btn btn-primary">Black & White</button>
+        <div class="col-lg-4">
+            <div class="row">
+                <div class="form-group" style="margin-bottom: 2rem;">
+                    <button id="blackWhiteBtn" class="btn btn-primary">Black & White</button>
+
+                </div>
 
             </div>
+            <div class="row">
+                <div class="form-group" style="margin-bottom: 2rem;">
+                    <button id="greyscaleBtn" class="btn btn-primary">Greyscale</button>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group" style="margin-bottom: 2rem;">
+                    <button id="blurBtn" class="btn btn-primary">Pixelate</button>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <button id="downloadBtn" class="btn btn-primary">Download</button>
 
         </div>
-<div class="row">
-    <div class="form-group" style="margin-bottom: 2rem;">
-        <button id="greyscaleBtn" class="btn btn-primary">Greyscale</button>
-
-                </div>
-</div>
-<div class="row">
-    <div class="form-group" style="margin-bottom: 2rem;">
-        <button id="blurBtn" class="btn btn-primary">Pixelate</button>
-
-                </div>
-</div>
-    </div>
-    <div class="col-lg-4">
-    <button id="downloadBtn" class="btn btn-primary">Download</button>
-
-    </div>
 
     </div>
 
@@ -54,12 +55,12 @@
         const downloadBtn = document.getElementById('downloadBtn');
         let originalImageData;
 
-        fileInput.addEventListener('change', function(e) {
+        fileInput.addEventListener('change', function (e) {
             const file = e.target.files[0];
             const reader = new FileReader();
-            reader.onload = function(event) {
+            reader.onload = function (event) {
                 const img = new Image();
-                img.onload = function() {
+                img.onload = function () {
                     canvas.width = img.width;
                     canvas.height = img.height;
                     ctx.drawImage(img, 0, 0);
@@ -73,10 +74,10 @@
             reader.readAsDataURL(file);
         });
 
-        greyScaleBtn.addEventListener('click', function() {
+        greyScaleBtn.addEventListener('click', function () {
             toggleGreyScale();
         });
-        blackWhiteBtn.addEventListener('click', function() {
+        blackWhiteBtn.addEventListener('click', function () {
             toggleBlackWhite();
         });
 
@@ -118,7 +119,7 @@
         }
 
 
-        downloadBtn.addEventListener('click', function() {
+        downloadBtn.addEventListener('click', function () {
             const downloadLink = document.createElement('a');
             downloadLink.href = canvas.toDataURL();
             downloadLink.download = 'filtered_image.png';
@@ -128,4 +129,5 @@
         });
     </script>
 </body>
+
 </html>
