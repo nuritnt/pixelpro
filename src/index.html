@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meco: Image Filters</title>
     <link rel="stylesheet" href="index.css">
-    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css" <script
-        src="../node_modules/jquery/dist/jquery.min.js" </head>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css"> <script
+        src="../node_modules/jquery/dist/jquery.min.js"></script> </head>
 
 <body>
     <div class="row" style="width: 100%; text-align: center;">
@@ -58,18 +58,33 @@
             const downloadBtn = document.getElementById('downloadBtn');
             let originalImageData;
 
-            fileInput.addEventListener('change', function (e) {
+            fileInput.addEventListener('change', function(e) {
                 const file = e.target.files[0];
                 const reader = new FileReader();
-                reader.onload = function (event) {
+                reader.onload = function(event) {
                     const img = new Image();
-                    img.onload = function () {
-                        canvas.width = img.width;
-                        canvas.height = img.height;
-                        ctx.drawImage(img, 0, 0);
+                    img.onload = function() {
+
+                        const maxWidth = window.innerWidth * 0.65;
+                        const maxHeight = window.innerHeight * 0.65;
+
+                        let destWidth, destHeight;
+                        if (img.width > img.height) {
+                            destWidth = maxWidth;
+                            destHeight = img.height * (maxWidth / img.width);
+                        } else {
+                            destHeight = maxHeight;
+                            destWidth = img.width * (maxHeight / img.height);
+                        }
+
+                        canvas.width = destWidth;
+                        canvas.height = destHeight;
+
+                        ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, destWidth, destHeight);
+
                         originalImageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-                        greyScaleBtn.style.display = 'block';
                         blackWhiteBtn.style.display = 'block';
+                        goBackBtn.style.display = 'block';
                         downloadBtn.style.display = 'block';
                     };
                     img.src = event.target.result;
@@ -77,11 +92,19 @@
                 reader.readAsDataURL(file);
             });
 
-            greyScaleBtn.addEventListener('click', function () {
+            blackWhiteBtn.addEventListener('click', function() {
+                ctx.putImageData(originalImageData, 0, 0);
+                toggleBlackWhite();
+            });
+
+            greyScaleBtn.addEventListener('click', function() {
+                ctx.putImageData(originalImageData, 0, 0);
                 toggleGreyScale();
             });
-            blackWhiteBtn.addEventListener('click', function () {
-                toggleBlackWhite();
+
+            blurBtn.addEventListener('click', function() {
+                ctx.putImageData(originalImageData, 0, 0);
+                toggleBlur();
             });
 
 
